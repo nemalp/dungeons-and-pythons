@@ -48,7 +48,7 @@ class BaseClass:
     def attack(self, by=None, enemy):
         if by == 'weapon':
             if self.equipped_weapon:
-                enemy.health -= self.equipped_weapon
+                enemy.health -= self.equipped_weapon.damage
         if by == 'magic':
             if self.can_cast():
                 enemy.health -= self.equipped_spell.damage

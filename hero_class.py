@@ -8,6 +8,7 @@ class Hero(BaseClass):
         self. title = title
         self.mana_regeneration_rate = mana_regeneration_rate
         self.max_mana = mana
+        self.location = None
 
     def known_as(self):
         return "{} the {}".format(self.name, self.title)

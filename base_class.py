@@ -45,7 +45,7 @@ class BaseClass:
     def learn(self, spell):
         self.equipped_spell = spell
 
-    def attack(self, by=None, enemy):
+    def attack(self, enemy, by=None):
         if by == 'weapon':
             if self.equipped_weapon:
                 enemy.health -= self.equipped_weapon.damage

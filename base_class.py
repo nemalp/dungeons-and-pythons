@@ -25,6 +25,3 @@ class BaseClass:
 
     def take_damage():
         pass
-
-    def test():
-        pass

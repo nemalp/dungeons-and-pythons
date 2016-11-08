@@ -5,7 +5,6 @@ from map_reader import load_map
 
 class Dungeon:
 
-    TREASURE_TYPES = ['heal', 'mana', 'weapon', 'spell']
     TREASURES = {
         'heal': [10, 20, 30, 40],
         'mana': [10, 20, 30, 40],
@@ -38,18 +37,23 @@ class Dungeon:
         treasures = ['heal', 'mana', 'weapon', 'spell']
 
         treasure = random.choice(treasures)
-        # print(treasure)
 
         if treasure == 'heal':
-            if hero.take_healing(treasure):
-                hero.take_healing(random.choice(treasure))
+            healing = random.choice(Dungeon.TREASURES[treasure])
+
+            if hero.take_healing(healing) is False:
+                print('Cannot take healing')
 
         elif treasure == 'mana':
-            if hero.take_mana(treasure):
-                hero.take_mana(random.choice(treasure))
+            mana = random.choice(Dungeon.TREASURES[treasure])
+
+            if hero.take_mana(mana) is False:
+                print('Cannot take mana')
 
         elif treasure == 'weapon':
-            hero.equip(random.choice(treasure))
+            weapon = random.choice(Dungeon.TREASURES[treasure])
+            hero.equip(weapon)
 
         elif treasure == 'spell':
-            hero.learn(random.choice(treasure))
+            spell = random.choice(Dungeon.TREASURES[treasure])
+            hero.learn(spell)

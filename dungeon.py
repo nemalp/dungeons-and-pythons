@@ -33,6 +33,9 @@ class Dungeon:
         else:
             return False
 
+    def update_map(self, hero):
+        self.map_[hero.location[0]][hero.location[1]] = 'H'
+
     def pick_treasure(self, treasure_type, hero):
         treasures = ['heal', 'mana', 'weapon', 'spell']
 
@@ -57,3 +60,20 @@ class Dungeon:
         elif treasure == 'spell':
             spell = random.choice(Dungeon.TREASURES[treasure])
             hero.learn(spell)
+
+        def move_hero(self, direction, hero):
+            if direction == 'up':
+                hero.location[0] -= 1
+                self.update_map(hero)
+
+            elif direction == 'down':
+                hero.location[0] += 1
+                self.update_map(hero)
+
+            elif direction == 'left':
+                hero.location[1] -= 1
+                self.update_map(hero)
+
+            elif direction == 'right':
+                hero.location[1] += 1
+                self.update_map(hero)

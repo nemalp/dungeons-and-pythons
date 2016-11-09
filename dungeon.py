@@ -19,7 +19,10 @@ class Dungeon:
                 if map[i][j] == 'S':
                     hero.location = (i, j)
                     flag_spawn_found = True
-        self.map[i][j] = 'H'
+                    self.map[i][j] = 'H'
+                    break
+                if flag_spawn_found is True:
+                    break
         if flag_spawn_found is True:
             return True
         else:

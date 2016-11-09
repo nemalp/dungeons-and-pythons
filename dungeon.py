@@ -1,6 +1,7 @@
 import random
 from pprint import pprint
 from map_reader import load_map
+from helpers import check_position
 
 
 class Dungeon:
@@ -61,19 +62,22 @@ class Dungeon:
             spell = random.choice(Dungeon.TREASURES[treasure])
             hero.learn(spell)
 
-        def move_hero(self, direction, hero):
-            if direction == 'up':
-                hero.location[0] -= 1
-                self.update_map(hero)
+    def move_hero(self, direction, hero):
+        if check_position(hero, direction, self.map_) is False:
+            return False
 
-            elif direction == 'down':
-                hero.location[0] += 1
-                self.update_map(hero)
+        elif direction == 'up':
+            hero.location[0] -= 1
+            self.update_map(hero)
 
-            elif direction == 'left':
-                hero.location[1] -= 1
-                self.update_map(hero)
+        elif direction == 'down':
+            hero.location[0] += 1
+            self.update_map(hero)
 
-            elif direction == 'right':
-                hero.location[1] += 1
-                self.update_map(hero)
+        elif direction == 'left':
+            hero.location[1] -= 1
+            self.update_map(hero)
+
+        elif direction == 'right':
+            hero.location[1] += 1
+            self.update_map(hero)

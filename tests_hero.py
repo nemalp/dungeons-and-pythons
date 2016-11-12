@@ -1,5 +1,6 @@
 import unittest
 from hero import Hero
+from enemy import Enemy
 from spell_and_weapon import Spell, Weapon
 
 
@@ -12,7 +13,10 @@ class TestHero(unittest.TestCase):
                           health=0, mana=100, mana_regeneration_rate=2)
         self.spell = Spell(name='Fireball', damage=30,
                            mana_cost=50, cast_range=2)
+        self.spell1 = Spell(name='Burn', damage=30,
+                            mana_cost=110, cast_range=2)
         self.weapon = Weapon(name="The Axe of Destiny", damage=20)
+        self.enemy = Enemy(health=100, mana=100, damage=20)
 
     def test_known_as(self):
         self.assertEqual(self.hero.known_as(), 'Bron the Dragonslayer')
@@ -32,6 +36,10 @@ class TestHero(unittest.TestCase):
         self.hero.take_mana(20)
         self.assertEqual(self.hero.get_mana(), 70)
 
+    def test_take_healing(self):
+        self.assertTrue(self.hero.take_healing(20))
+        self.assertFalse(self.hero1.take_healing(20))
+
     def test_is_alive(self):
         self.assertTrue(self.hero.is_alive())
         self.assertFalse(self.hero1.is_alive())
@@ -47,8 +55,12 @@ class TestHero(unittest.TestCase):
 
     def test_can_cast(self):
         self.assertFalse(self.hero.can_cast())
+
         self.hero.learn(self.spell)
         self.assertTrue(self.hero.can_cast())
+
+        self.hero.learn(self.spell1)
+        self.assertFalse(self.hero.can_cast())
 
     def test_attack(self):
         self.assertEqual(self.hero.attack(by='magic'), 0)
@@ -58,6 +70,21 @@ class TestHero(unittest.TestCase):
         self.hero.equip(self.weapon)
         self.assertEqual(self.hero.attack(by='magic'), 30)
         self.assertEqual(self.hero.attack(by='weapon'), 20)
+        self.assertEqual(self.hero.attack(), 0)
+
+    def test_enemy_attack(self):
+        self.assertEqual(self.enemy.attack(by='magic'), 20)
+        self.assertEqual(self.enemy.attack(by='weapon'), 20)
+
+        self.enemy.learn(self.spell)
+        self.assertEqual(self.enemy.attack(by='magic'), 30)
+
+        self.enemy.equip(self.weapon)
+        self.assertEqual(self.enemy.attack(by='weapon'), 20)
+
+    def test_take_damage(self):
+        # TODO
+        self.hero.take_damage(self.weapon.damage)
 
 
 if __name__ == '__main__':

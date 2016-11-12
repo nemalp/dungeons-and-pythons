@@ -27,6 +27,17 @@ class Hero:
         else:
             self.mana += mana_points
 
+    def take_healing(self, healing_points):
+        if not self.is_alive():
+            return False
+
+        if self.health + healing_points > self.max_health:
+            self.health = self.max_health
+        else:
+            self.health += healing_points
+
+        return True
+
     def is_alive(self):
         return self.health > 0
 
@@ -46,9 +57,9 @@ class Hero:
 
     def attack(self, by=None):
         if by == 'magic' and self.can_cast():
-            if self.mana - self.spell.mana_cost < 0:
-                self.mana = 0
-            else:
+            # TODO check if there is a enemy in the given cast range
+            # if there is, start a fight
+            if self.spell.mana_cost <= self.mana:
                 self.mana -= self.spell.mana_cost
 
             return self.spell.damage
@@ -57,3 +68,9 @@ class Hero:
             return self.weapon.damage
 
         return 0
+
+    def take_damage(self, damage_points):
+        if damage_points > self.health:
+            self.health = 0
+        else:
+            self.health -= damage_points

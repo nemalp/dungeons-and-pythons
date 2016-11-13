@@ -52,7 +52,8 @@ class Fight:
                     if self.hero.weapon is not None:
                         self.enemy.take_damage(self.hero.attack('weapon'))
                         print("Hero hits with {} for {} dmg. Enemy health is {}".format(self.hero.weapon.name,
-                                                                                        self.hero.attack('weapon')))
+                                                                                        self.hero.attack('weapon'),
+                                                                                        self.enemy.get_health()))
                     else:
                         if self.hero.can_cast():
                             print("Hero casts a {}. Hits enemy for {}. Enemy health is {}".format(self.hero.spell.name,
@@ -65,7 +66,7 @@ class Fight:
                         print("Enemy is dead")
                         break
                     self.hero.take_damage(self.enemy.attack('weapon'))
-                    print("Enemy hits hero for {} damage. Hero health is {}".format(self.enemy.damage,
+                    print("Enemy hits hero for {} damage. Hero health is {}".format(self.enemy.attack('weapon'),
                                                                                     self.hero.get_health()))
                     if self.hero.is_alive() is False:
                         print("Hero is dead")

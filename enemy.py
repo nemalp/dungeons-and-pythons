@@ -68,9 +68,10 @@ class Enemy:
             else:
                 return self.spell.damage
 
-        if by == 'weapon' and self.weapon:
-            if self.weapon.damage < self.damage:
-                return self.damage
-            else:
-                return self.weapon.damage
-        return 0
+        if by == 'weapon':
+            if self.weapon:
+                if self.weapon.damage < self.damage:
+                    return self.damage
+                else:
+                    return self.weapon.damage
+            return self.damage

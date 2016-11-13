@@ -6,8 +6,6 @@ from weapon_and_spell_classes import Spell
 
 def main():
     hero = Hero("Ime", "Titla", 100, 100, 10)
-    fireball = Spell("Fireball", 20, 10, 3)
-    hero.learn(fireball)
     dungeon = Dungeon()
     print(dungeon.print_map())
     dungeon.spawn(hero)
@@ -20,7 +18,6 @@ def main():
         print(hero.weapon.name)
         print(hero.weapon.damage)
     if hero.spell is not None:
-
         print(hero.spell.name)
         print(hero.spell.damage)
     print(hero.get_health())
